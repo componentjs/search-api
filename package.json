@@ -5,6 +5,7 @@
   "dependencies": {
     "express": "3.x",
     "redis": "0.8.1",
+    "superagent": "0.9.1",
     "component-wiki": "0.0.1"
   }
 }
