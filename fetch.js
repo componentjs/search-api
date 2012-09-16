@@ -5,7 +5,8 @@
 
 var wiki = require('component-wiki')
   , redis = require('redis')
-  , db = redis.createClient();
+  , db = redis.createClient()
+  , fs = require('fs');
 
 var pending = 0;
 
@@ -13,6 +14,9 @@ db.flushdb();
 
 wiki(function(err, pkgs){
   if (err) throw err;
+
+  fs.writeFileSync('components.json', JSON.stringify(pkgs));
+
   pkgs.forEach(function(pkg){
     if (!pkg) return;
     console.log();

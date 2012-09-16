@@ -5,13 +5,19 @@
 
 ## API
 
+### GET /all
+
+  Respond with all packages:
+  
+  - `200` responds with json array of component.json contents
+
 ### GET /search/:query
 
   Search for `query`:
   
   - `500` shit exploded
   - `404` no packages, responds with json array `[]`
-  - `200` packages found, responds json array of component.json contents
+  - `200` packages found, responds with json array of component.json contents
 
 # License
 

@@ -4,6 +4,8 @@
  */
 
 var express = require('express')
+  , fs = require('fs')
+  , all = fs.readFileSync('./components.json')
   , redis = require('redis')
   , db = redis.createClient()
   , app = express();
@@ -64,6 +66,16 @@ function reply(res) {
     });
   }
 }
+
+/**
+ * GET all packages.
+ */
+
+app.get('/all', function(req, res){
+  db.incr('stats:all');
+  res.type('json');
+  res.send(all);
+});
 
 /**
  * GET search :query.
