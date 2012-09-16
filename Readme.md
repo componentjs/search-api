@@ -9,9 +9,9 @@
 
   Search for `query`:
   
-    - `500` shit exploded
-    - `404` no packages, responds with json array `[]`
-    - `200` packages found, responds json array of component.json contents
+  - `500` shit exploded
+  - `404` no packages, responds with json array `[]`
+  - `200` packages found, responds json array of component.json contents
 
 # License
 
