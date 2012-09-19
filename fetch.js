@@ -27,6 +27,7 @@ wiki(function(err, pkgs){
     var words = [pkg.name];
     words = words.concat(parse(pkg.description));
     words = words.concat(pkg.keywords || []);
+    pkg.stars = 0;
 
     ++pending;
     request
