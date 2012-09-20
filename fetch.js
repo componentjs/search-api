@@ -14,46 +14,48 @@ var wiki = require('component-wiki')
 var pending = 0;
 var packages;
 
-db.flushdb();
+fetch();
 
-wiki(function(err, pkgs){
-  if (err) throw err;
-  packages = pkgs;
+function fetch() {
+  wiki(function(err, pkgs){
+    if (err) throw err;
+    packages = pkgs;
 
-  pkgs.forEach(function(pkg){
-    if (!pkg) return;
-    console.log();
-    console.log('%s:', pkg.name);
-    var words = [pkg.name];
-    words = words.concat(parse(pkg.description));
-    words = words.concat(pkg.keywords || []);
-    pkg.stars = 0;
-
-    ++pending;
-    request
-    .get('https://api.github.com/repos/' + pkg.repo + '/stargazers')
-    .end(function(res){
-      done();
-
-      if (res.ok) {
-        pkg.stars = res.body.length;
-        console.log('%s stars: %d', pkg.repo, pkg.stars);
-      }
+    pkgs.forEach(function(pkg){
+      if (!pkg) return;
+      console.log();
+      console.log('%s:', pkg.name);
+      var words = [pkg.name];
+      words = words.concat(parse(pkg.description));
+      words = words.concat(pkg.keywords || []);
+      pkg.stars = 0;
 
       ++pending;
-      db.set('component:' + pkg.repo, JSON.stringify(pkg), done);
-    })
+      request
+      .get('https://api.github.com/repos/' + pkg.repo + '/stargazers')
+      .end(function(res){
+        done();
 
-    ++pending;
-    db.sadd('components', pkg.repo, done);
+        if (res.ok) {
+          pkg.stars = res.body.length;
+          console.log('%s stars: %d', pkg.repo, pkg.stars);
+        }
 
-    words.forEach(function(word){
-      console.log('  "%s"', word);
+        ++pending;
+        db.set('component:' + pkg.repo, JSON.stringify(pkg), done);
+      })
+
       ++pending;
-      db.sadd('word:' + word, pkg.repo, done);
+      db.sadd('components', pkg.repo, done);
+
+      words.forEach(function(word){
+        console.log('  "%s"', word);
+        ++pending;
+        db.sadd('word:' + word, pkg.repo, done);
+      });
     });
-  });
-})
+  })
+}
 
 function parse(str) {
   return str.match(/\w+/).map(function(word){
