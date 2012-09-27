@@ -8,7 +8,7 @@ var express = require('express')
   , all = fs.readFileSync('./components.json')
   , redis = require('redis')
   , db = redis.createClient()
-  , app = express();
+  , app = module.exports = express();
 
 // middleware
 
@@ -96,8 +96,3 @@ app.get('/search/:query', function(req, res){
   query = wordKeys(query);
   db.sunion(query, reply(res));
 });
-
-// boot
-
-app.listen(4001);
-console.log('app listening on port 4001');
