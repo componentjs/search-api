@@ -32,12 +32,12 @@ function fetch() {
 
       ++pending;
       request
-      .get('https://api.github.com/repos/' + pkg.repo + '/stargazers')
+      .get('https://api.github.com/repos/' + pkg.repo)
       .end(function(res){
         done();
 
         if (res.ok) {
-          pkg.stars = res.body.length;
+          pkg.stars = res.body.watchers_count;
           console.log('%s stars: %d', pkg.repo, pkg.stars);
         }
 
