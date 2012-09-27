@@ -5,7 +5,7 @@
 
 var express = require('express')
   , fs = require('fs')
-  , all = fs.readFileSync('./components.json')
+  , all = fs.readFileSync(__dirname + '/components.json')
   , redis = require('redis')
   , db = redis.createClient()
   , app = module.exports = express();
