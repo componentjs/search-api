@@ -65,7 +65,7 @@ function parse(str) {
 
 function done() {
   --pending || (function(){
-    fs.writeFileSync('components.json', JSON.stringify(packages));
+    fs.writeFileSync(__dirname + '/components.json', JSON.stringify(packages));
     process.exit();
   })();
 }
