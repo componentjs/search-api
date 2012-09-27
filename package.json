@@ -7,5 +7,6 @@
     "redis": "0.8.1",
     "superagent": "0.9.1",
     "component-wiki": "0.0.2"
-  }
+  },
+  "main": "app.js"
 }
