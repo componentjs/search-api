@@ -26,6 +26,7 @@ function fetch() {
       console.log();
       console.log('%s:', pkg.name);
       var words = [pkg.name];
+      if (!pkg.description) console.log('"description" missing for %s', pkg.name);
       words = words.concat(parse(pkg.description));
       words = words.concat(pkg.keywords || []);
       pkg.stars = 0;
@@ -58,7 +59,7 @@ function fetch() {
 }
 
 function parse(str) {
-  return str.match(/\w+/).map(function(word){
+  return String(str).match(/\w+/).map(function(word){
     return word.toLowerCase();
   });
 }
