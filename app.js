@@ -20,7 +20,7 @@ app.use(express.responseTime());
  */
 
 function words(str) {
-  return str.match(/\w+/);
+  return str.match(/[\w-]+/g);
 }
 
 /**
