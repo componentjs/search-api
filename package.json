@@ -1,7 +1,7 @@
 {
   "name": "component-search",
   "description": "Component search server",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "dependencies": {
     "express": "3.x",
     "redis": "0.8.1",
