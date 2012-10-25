@@ -6,7 +6,7 @@
     "express": "3.x",
     "redis": "0.8.1",
     "superagent": "0.9.1",
-    "component-wiki": "0.0.2"
+    "component-wiki": "0.0.3"
   },
   "main": "app.js"
 }
