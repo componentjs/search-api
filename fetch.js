@@ -17,7 +17,7 @@ var packages;
 fetch();
 
 function fetch() {
-  wiki(function(err, pkgs){
+  var batch = wiki(function(err, pkgs){
     if (err) throw err;
     packages = pkgs;
 
@@ -55,7 +55,15 @@ function fetch() {
         db.sadd('word:' + word, pkg.repo, done);
       });
     });
-  })
+  });
+
+  batch.on('error', function(err){
+    if (err.json) {
+      console.error('invalid json: %s', err.url);
+    } else {
+      console.error(err.stack);
+    }
+  });
 }
 
 function parse(str) {
