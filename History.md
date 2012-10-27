@@ -1,4 +1,10 @@
 
+0.1.2 / 2012-10-27 
+==================
+
+  * add basic auth support
+  * output res.status for errors from GH
+
 0.1.1 / 2012-10-24 
 ==================
 
