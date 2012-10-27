@@ -17,6 +17,7 @@ var packages;
 fetch();
 
 var auth = fs.readFileSync(process.env.HOME + '/.component-search-auth', 'ascii');
+auth = new Buffer(auth).toString('base64');
 
 function fetch() {
   var batch = wiki(function(err, pkgs){
@@ -35,7 +36,8 @@ function fetch() {
 
       ++pending;
       request
-      .get('https://' + auth + '@api.github.com/repos/' + pkg.repo)
+      .get('https://api.github.com/repos/' + pkg.repo)
+      .set('Authorization', 'Basic ' + auth)
       .end(function(res){
         done();
 
