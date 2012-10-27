@@ -56,7 +56,6 @@ function fetch() {
       db.sadd('components', pkg.repo, done);
 
       words.forEach(function(word){
-        console.log('  "%s"', word);
         ++pending;
         db.sadd('word:' + word, pkg.repo, done);
       });
