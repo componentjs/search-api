@@ -40,6 +40,8 @@ function fetch() {
         if (res.ok) {
           pkg.stars = res.body.watchers_count;
           console.log('%s stars: %d', pkg.repo, pkg.stars);
+        } else {
+          console.log('github: %s %s', res.status, res.text);
         }
 
         ++pending;
