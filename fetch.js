@@ -25,8 +25,7 @@ function fetch() {
 
     pkgs.forEach(function(pkg){
       if (!pkg) return;
-      console.log();
-      console.log('%s:', pkg.name);
+      console.log('%s', pkg.name);
       var words = [pkg.name];
       if (!pkg.description) console.log('"description" missing for %s', pkg.name);
       words = words.concat(parse(pkg.description));
