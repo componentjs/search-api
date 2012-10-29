@@ -8,7 +8,8 @@ var express = require('express')
   , all = fs.readFileSync(__dirname + '/components.json')
   , redis = require('redis')
   , db = redis.createClient()
-  , app = module.exports = express();
+  , app = module.exports = express()
+  , ms = require('ms');
 
 // middleware
 
@@ -96,3 +97,15 @@ app.get('/search/:query', function(req, res){
   query = wordKeys(query);
   db.sunion(query, reply(res));
 });
+
+/**
+ * Update all.
+ */
+
+setInterval(function(){
+  fs.readFile(__dirname + '/components.json', function(err, buf){
+    if (err) return console.log(err.stack);
+    console.log('updated all');
+    all = buf;
+  });
+}, ms('5m'));
