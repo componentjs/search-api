@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -18,6 +17,7 @@ fetch();
 
 var auth = fs.readFileSync(process.env.HOME + '/.component-search-auth', 'ascii');
 auth = new Buffer(auth).toString('base64');
+auth = auth.replace(/=/g, ''); // strip equals signs used as base64 padding
 
 function fetch() {
   var batch = wiki(function(err, pkgs){
