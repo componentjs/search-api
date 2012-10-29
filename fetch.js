@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -17,7 +16,7 @@ var packages;
 fetch();
 
 var auth = fs.readFileSync(process.env.HOME + '/.component-search-auth', 'ascii');
-auth = new Buffer(auth).toString('base64');
+auth = new Buffer(auth.trim()).toString('base64');
 
 function fetch() {
   var batch = wiki(function(err, pkgs){
