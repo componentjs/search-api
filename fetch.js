@@ -70,7 +70,9 @@ function fetch() {
 }
 
 function parse(str) {
-  return String(str).match(/\w+/).map(function(word){
+  str = String(str).trim();
+  if (!str) return [];
+  return str.match(/\w+/).map(function(word){
     return word.toLowerCase();
   });
 }
