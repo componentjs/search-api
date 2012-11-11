@@ -68,6 +68,18 @@ function reply(res) {
   }
 }
 
+/*
+ * CORS support.
+ */
+
+app.all('*', function(req, res, next){
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET');
+  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+  if ('OPTIONS' == req.method) return res.send(200);
+  next();
+});
+
 /**
  * GET all packages.
  */
