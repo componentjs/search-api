@@ -30,6 +30,7 @@ function fetch() {
       if (!pkg.description) console.log('"description" missing for %s', pkg.name);
       words = words.concat(parse(pkg.description));
       words = words.concat(pkg.keywords || []);
+      pkg.dependents = dependents(pkg, pkgs)
       pkg.stars = 0;
 
       ++pending;
@@ -67,6 +68,27 @@ function fetch() {
       console.error(err.stack);
     }
   });
+}
+
+/**
+ * List packages that depend on the supplied package, `pkg`.
+ *
+ * @param pkg
+ * @param pkgs {Array} All packages to analyse.
+ * @return {Array} Repos of packages that depend on `pkg`.
+ */
+function dependents(pkg, pkgs) {
+  var repo = pkg.repo
+  return pkgs.filter(blank).filter(function(pkg) {
+    pkg.dependencies = pkg.dependencies || []
+    return Object.keys(pkg.dependencies).indexOf(repo) !== -1
+  }).map(function(pkg) {
+    return pkg.repo
+  })
+}
+
+function blank(pkg) {
+  return !!pkg
 }
 
 function parse(str) {
