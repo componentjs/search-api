@@ -15,6 +15,7 @@ var express = require('express')
 
 app.use(express.logger());
 app.use(express.responseTime());
+app.use(express.compress());
 
 /**
  * Parse words.
