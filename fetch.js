@@ -29,7 +29,7 @@ function fetch() {
       console.log('%s', pkg.name);
       var words = [pkg.name];
       if (!pkg.description) console.log('"description" missing for %s', pkg.name);
-      words = words.concat(util.words(pkg.description));
+      else words = words.concat(util.words(pkg.description));
       words = words.concat(pkg.keywords || []);
       pkg.dependents = util.dependents(pkg, pkgs);
       pkg.stars = 0;
