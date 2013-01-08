@@ -9,49 +9,14 @@ var express = require('express')
   , redis = require('redis')
   , db = redis.createClient()
   , app = module.exports = express()
-  , ms = require('ms');
+  , ms = require('ms')
+  , util = require("./utils");
 
 // middleware
 
 app.use(express.logger());
 app.use(express.responseTime());
 app.use(express.compress());
-
-/**
- * Parse words.
- */
-
-function words(str) {
-  return str.match(/[\w-]+/g);
-}
-
-/**
- * Word keys from `words`.
- */
-
-function wordKeys(words) {
-  return words.map(function(str){
-    return 'word:' + str;
-  });
-}
-
-/**
- * Component keys from `names`.
- */
-
-function componentKeys(names) {
-  return names.map(function(str){
-    return 'component:' + str;
-  });
-}
-
-/**
- * Parse pkg json strings.
- */
-
-function parse(pkgs) {
-  return pkgs.map(JSON.parse);
-}
 
 /**
  * Respond with packages.
@@ -62,7 +27,7 @@ function reply(res) {
     if (err) return res.send(500);
     if (!keys.length) return res.send(404, []);
 
-    db.mget(componentKeys(keys), function(err, pkgs){
+    db.mget(util.componentKeys(keys), function(err, pkgs){
       if (err) return res.send(500);
       res.send(parse(pkgs));
     });
@@ -96,7 +61,7 @@ app.get('/all', function(req, res){
  */
 
 app.get('/search/:query', function(req, res){
-  var query = words(req.params.query);
+  var query = util.words(req.params.query);
 
   // query stats
   db.incr('stats:queries');
@@ -107,7 +72,7 @@ app.get('/search/:query', function(req, res){
   })
 
   // perform search
-  query = wordKeys(query);
+  query = util.wordKeys(query);
   db.sunion(query, reply(res));
 });
 
