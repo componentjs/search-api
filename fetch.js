@@ -6,7 +6,7 @@ var wiki = require('component-wiki')
   , request = require('superagent')
   , redis = require('redis')
   , db = redis.createClient()
-  , util = require("./utils")
+  , util = require('./util')
   , fs = require('fs');
 
 // NOTE: quick / horrid code lives here ;D
