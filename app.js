@@ -10,7 +10,7 @@ var express = require('express')
   , db = redis.createClient()
   , app = module.exports = express()
   , ms = require('ms')
-  , util = require("./utils");
+  , util = require('./util');
 
 // middleware
 
