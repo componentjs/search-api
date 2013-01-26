@@ -54,7 +54,7 @@ exports.parsePkg = function parse(pkgs) {
  * @return {Array} Repos of packages that depend on `pkg`.
  */
 
-function dependents(pkg, pkgs) {
+exports.dependents = function dependents(pkg, pkgs) {
   var repo = pkg.repo
   return pkgs.filter(blank).filter(function(pkg) {
     pkg.dependencies = pkg.dependencies || []
