@@ -14,7 +14,31 @@ var wiki = require('component-wiki')
 var pending = 0;
 var packages;
 
-fetch();
+removeSearchIndex();
+
+function removeSearchIndex(){
+  db.keys('word*', function(err, ids){
+    if (err) throw err;
+    console.log('removing %d indexes', ids.length);
+    db.del(ids, function(err){
+      if (err) throw err;
+      console.log('index removed')
+      removeComponents();
+    });
+  });
+}
+
+function removeComponents(){
+  db.keys('component*', function(err, ids){
+    if (err) throw err;
+    console.log('removing %d components', ids.length);
+    db.del(ids, function(err){
+      if (err) throw err;
+      console.log('removed components');
+      fetch();
+    });
+  });
+}
 
 var auth = fs.readFileSync(process.env.HOME + '/.component-search-auth', 'ascii');
 auth = new Buffer(auth.trim()).toString('base64');
@@ -79,3 +103,4 @@ function done() {
     process.exit();
   })();
 }
+
