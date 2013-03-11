@@ -19,6 +19,7 @@ removeSearchIndex();
 function removeSearchIndex(){
   db.keys('word*', function(err, ids){
     if (err) throw err;
+    if (!ids.length) return removeComponents();
     console.log('removing %d indexes', ids.length);
     db.del(ids, function(err){
       if (err) throw err;
