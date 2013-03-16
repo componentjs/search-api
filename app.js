@@ -29,7 +29,7 @@ function reply(res) {
 
     db.mget(util.componentKeys(keys), function(err, pkgs){
       if (err) return res.send(500);
-      res.send(parse(pkgs));
+      res.send(pkgs.map(JSON.parse));
     });
   }
 }

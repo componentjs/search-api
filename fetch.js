@@ -32,6 +32,7 @@ function removeSearchIndex(){
 function removeComponents(){
   db.keys('component*', function(err, ids){
     if (err) throw err;
+    if (!ids.length) return fetch();
     console.log('removing %d components', ids.length);
     db.del(ids, function(err){
       if (err) throw err;

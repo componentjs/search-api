@@ -1,3 +1,4 @@
+
 /**
  * Parse words.
  * @param str {String}
@@ -34,16 +35,6 @@ exports.componentKeys = function componentKeys(names) {
   return names.map(function(str){
     return 'component:' + str;
   });
-};
-
-/**
- * Parse pkg json strings.
- * @param pkgs {Array} All packages to parse.
- * @return {Array} Parsed packages.
- */
-
-exports.parsePkg = function parse(pkgs) {
-  return pkgs.map(JSON.parse);
 };
 
 /**
