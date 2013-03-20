@@ -5,7 +5,7 @@
  * @return {Array} Words.
  */
 
-exports.words = function words(str) {
+exports.words = function(str) {
   str = String(str).trim();
   if (!str) return [];
   return str.match(/\w+/).map(function(word){
@@ -19,7 +19,7 @@ exports.words = function words(str) {
  * @return {Array} Word keys.
  */
 
-exports.wordKeys = function wordKeys(words) {
+exports.wordKeys = function(words) {
   return words.map(function(str){
     return 'word:' + str;
   });
@@ -31,7 +31,7 @@ exports.wordKeys = function wordKeys(words) {
  * @return {Array} Component keys.
  */
 
-exports.componentKeys = function componentKeys(names) {
+exports.componentKeys = function(names) {
   return names.map(function(str){
     return 'component:' + str;
   });
@@ -45,7 +45,7 @@ exports.componentKeys = function componentKeys(names) {
  * @return {Array} Repos of packages that depend on `pkg`.
  */
 
-exports.dependents = function dependents(pkg, pkgs) {
+exports.dependents = function(pkg, pkgs) {
   var repo = pkg.repo
   return pkgs.filter(blank).filter(function(pkg) {
     pkg.dependencies = pkg.dependencies || []
