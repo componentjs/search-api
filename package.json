@@ -7,7 +7,8 @@
     "redis": "0.8.1",
     "superagent": "0.9.1",
     "component-wiki": "0.0.4",
-    "ms": "~0.4.0"
+    "ms": "~0.4.0",
+    "longjohn": "~0.2.0"
   },
   "main": "app.js"
 }

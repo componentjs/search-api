@@ -4,6 +4,7 @@
  */
 
 var express = require('express')
+  , longjohn = require('longjohn')
   , fs = require('fs')
   , all = fs.readFileSync(__dirname + '/components.json')
   , redis = require('redis')
