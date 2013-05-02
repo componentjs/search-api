@@ -66,6 +66,7 @@ function fetch() {
       request
       .get('https://api.github.com/repos/' + pkg.repo)
       .set('Authorization', 'Basic ' + auth)
+      .set('User-Agent', 'Github')
       .end(function(res){
         done();
 
