@@ -2,6 +2,7 @@
 # Component Search
 
   The component search application, powered by Express and Redis.
+  Uses the [componentjs/wiki](https://github.com/componentjs/wiki) to fetch data.
 
 ## API
 
